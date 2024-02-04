@@ -157,14 +157,14 @@ class Berekenen:
         cv2.line(self.img, (pos[0][0]*35+50, pos[0][1]*40+45), (pos[1][0]*35+50, pos[1][1]*40+45), (0, 0, 0), 2)
 
 
-veld_string = """a s p e r g e
-n i i q d e x
-s d v t h n x
-e d v j l t k
-n i a q d e x"""
-
-zoeken = []
-
+# veld_string = """a s p e r g e
+# n i i q d e x
+# s d v t h n x
+# e d v j l t k
+# n i a q d e x"""
+#
+# zoeken = []
+#
 def maak_lijst(veld):
     lijst = []
     y = veld.split("\n")
@@ -172,4 +172,4 @@ def maak_lijst(veld):
         lijst.append(x.split(" "))
     return lijst
 
-Berekenen(maak_lijst(veld_string), zoeken, veld_string)
+# Berekenen(maak_lijst(veld_string), zoeken, veld_string)

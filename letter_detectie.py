@@ -8,7 +8,7 @@ import pytesseract
 
 # Now we will read the image in our program
 # you have to put your image path in place of photo.jpg
-img = cv2.imread('woordzoeker.png')
+img = cv2.imread('woordzoeker3.png')
 
 # Our image will read as BGR format,
 # So we will convert in RGB format because
