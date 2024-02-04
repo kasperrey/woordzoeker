@@ -24,13 +24,12 @@ class Berekenen:
 
     def zoek(self, aantal, woord):
         pos = []
-        woord_kijk = ""
         for y in range(len(self.veld)):
             for x in range(len(self.veld[y])):
                 if self.veld[y][x] == woord[0]:
-                    woord_kijk += self.veld[y][x]
-                    pos.append((x, y))
                     if len(self.veld)>y+1:
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y+1][x] == woord[1]:
                             woord_kijk += self.veld[y+1][x]
                             woord_uit, pos_2 = self.verder(0, 1, woord_kijk, aantal, x, y)
@@ -40,6 +39,8 @@ class Berekenen:
                                 pos.append(pos_2)
                                 return woord_uit, pos
                     if len(self.veld[y])>x+1:
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y][x+1] == woord[1]:
                             woord_kijk += self.veld[y][x+1]
                             woord_uit, pos_2 = self.verder(1, 0, woord_kijk, aantal, x, y)
@@ -49,6 +50,8 @@ class Berekenen:
                                 pos.append(pos_2)
                                 return woord_uit, pos
                     if 0<=x-1:
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y][x-1] == woord[1]:
                             woord_kijk += self.veld[y][x-1]
                             woord_uit, pos_2 = self.verder(-1, 0, woord_kijk, aantal, x, y)
@@ -58,6 +61,8 @@ class Berekenen:
                                 pos.append(pos_2)
                                 return woord_uit, pos
                     if 0<=y-1:
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y-1][x] == woord[1]:
                             woord_kijk += self.veld[y-1][x]
                             woord_uit, pos_2 = self.verder(0, -1, woord_kijk, aantal, x, y)
@@ -67,6 +72,8 @@ class Berekenen:
                                 pos.append(pos_2)
                                 return woord_uit, pos
                     if len(self.veld)>y+1 and len(self.veld[y])>x+1:
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y+1][x+1] == woord[1]:
                             woord_kijk += self.veld[y+1][x+1]
                             woord_uit, pos_2 = self.verder(1, 1, woord_kijk, aantal, x, y)
@@ -76,6 +83,8 @@ class Berekenen:
                                 pos.append(pos_2)
                                 return woord_uit, pos
                     if len(self.veld)>y+1 and 0<=x-1:
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y+1][x-1] == woord[1]:
                             woord_kijk += self.veld[y+1][x-1]
                             woord_uit, pos_2 = self.verder(-1, 1, woord_kijk, aantal, x, y)
@@ -85,7 +94,8 @@ class Berekenen:
                                 pos.append(pos_2)
                                 return woord_uit, pos
                     if 0<=y-1 and len(self.veld[y])>x+1:
-                        print(self.veld[y-1][x+1])
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y-1][x+1] == woord[1]:
                             woord_kijk += self.veld[y-1][x+1]
                             woord_uit, pos_2 = self.verder(1, -1, woord_kijk, aantal, x, y)
@@ -95,6 +105,8 @@ class Berekenen:
                                 pos.append(pos_2)
                                 return woord_uit, pos
                     if 0<=y-1 and 0<=x-1:
+                        pos = [(x, y)]
+                        woord_kijk = self.veld[y][x]
                         if self.veld[y-1][x-1] == woord[1]:
                             woord_kijk += self.veld[y-1][x-1]
                             woord_uit, pos_2 = self.verder(-1, -1, woord_kijk, aantal, x, y)
@@ -113,7 +125,7 @@ class Berekenen:
                     pos = (x, y+a)
                     woord += self.veld[y+a][x]
             elif plus_y < 0 and plus_x == 0:
-                if 0 < y-a:
+                if 0 <= y-a:
                     pos = (x, y-a)
                     woord += self.veld[y-a][x]
             elif plus_x > 0 and plus_y == 0:
@@ -121,7 +133,7 @@ class Berekenen:
                     pos = (x+a, y)
                     woord += self.veld[y][x+a]
             elif plus_x < 0 and plus_y == 0:
-                if 0 < x - a:
+                if 0 <= x - a:
                     pos = (x-a, y)
                     woord += self.veld[y][x-a]
             elif plus_x > 0 < plus_y:
@@ -146,13 +158,13 @@ class Berekenen:
         cv2.line(self.img, (pos[0][0]*35+50, pos[0][1]*40+45), (pos[1][0]*35+50, pos[1][1]*40+45), (0, 0, 0), 2)
 
 
-#veld_string = """a s p e r g e
-#n i a q d e x
-#s d v t h n x
-#e d v j l t k
-#n i a q d e x"""
+veld_string = """a s p e r g e
+n i i q d e x
+s d v t h n x
+e d v j l t k
+n i a q d e x"""
 
-#zoeken = ["niaqdex"]
+zoeken = []
 
 def maak_lijst(veld):
     lijst = []
@@ -161,4 +173,4 @@ def maak_lijst(veld):
         lijst.append(x.split(" "))
     return lijst
 
-# Berekenen(maak_lijst(veld_string), zoeken)
+Berekenen(maak_lijst(veld_string), zoeken, veld_string)
