@@ -23,7 +23,6 @@ class Berekenen:
         cv2.destroyAllWindows()
 
     def zoek(self, aantal, woord):
-        pos = []
         for y in range(len(self.veld)):
             for x in range(len(self.veld[y])):
                 if self.veld[y][x] == woord[0]:
